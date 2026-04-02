@@ -5822,7 +5822,7 @@ bool Audio::setPinout(uint8_t BCLK, uint8_t LRC, uint8_t DOUT, int8_t MCLK) {
     goto exit;
 #endif
 
-    m_f_psramFound = psramInit();
+    m_f_psramFound = psramInit() || (heap_caps_get_total_size(MALLOC_CAP_SPIRAM) > 0);
     if (!m_f_psramFound) {
         AUDIO_LOG_ERROR("PSRAM not found");
         result = false;
